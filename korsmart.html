@@ -1,58 +1,141 @@
-submitBtn.addEventListener("click", () => {
-    let poäng = 0;
-    const total = Object.keys(correctAnswers).length;
-
-    // Gå igenom varje fråga
-    for (let key in correctAnswers) {
-        const radios = document.getElementsByName(key);
-        let valtSvar = null;
-
-        // Kolla vilket alternativ som är ikryssat
-        for (let radio of radios) {
-            if (radio.checked) {
-                valtSvar = radio.value;
-                break;
-            }
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Körkortsquiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 700px;
         }
+        h1 {
+            text-align: center;
+        }
+        .fråga {
+            margin: 25px 0;
+            padding: 15px;
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #resultat {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .rätt    { color: green; }
+        .fel     { color: red; }
+    </style>
+</head>
+<body>
 
-        const feedback = document.getElementById("feedback" + key.slice(1));
+    <h1>Testa dina körkortskunskaper!</h1>
+    <p>Välj svar och klicka på "Rätta svaren" när du är klar.</p>
 
-        if (valtSvar === correctAnswers[key]) {
-            feedback.textContent = "✔ Rätt!";
-            feedback.style.color = "green";
-            feedback.style.fontWeight = "bold";
-            poäng++;
-        } else {
-            let text = "✘ Fel";
-            if (valtSvar) {
-                text += " – rätt svar är " + correctAnswers[key].toUpperCase();
+    <div id="quiz">
+
+        <div class="fråga">
+            <h3>1. Vad betyder den här skylten?</h3>
+            <img src="https://media.istockphoto.com/id/172233405/sv/foto/stop-sign-with-clipping-path.jpg?s=612x612&w=0&k=20&c=nC8a87InK0mMsAEEqifmGXfhEE5j4fhRD7krKEzSFZg=" width="120">
+            <br>
+            <input type="radio" name="q1" value="a"> Stopp – du måste stanna helt<br>
+            <input type="radio" name="q1" value="b"> Varning för vägkorsning<br>
+            <input type="radio" name="q1" value="c"> Väjningsplikt<br>
+            <p id="svar1"></p>
+        </div>
+
+        <div class="fråga">
+            <h3>2. Hur fort får du köra i tätbebyggt område om inget annat anges?</h3>
+            <input type="radio" name="q2" value="a"> 30 km/h<br>
+            <input type="radio" name="q2" value="b"> 50 km/h<br>
+            <input type="radio" name="q2" value="c"> 70 km/h<br>
+            <p id="svar2"></p>
+        </div>
+
+        <div class="fråga">
+            <h3>3. Du kör 110 km/h. Hur många gånger längre bromssträcka vid 220 km/h?</h3>
+            <input type="radio" name="q3" value="a"> Dubbelt så lång<br>
+            <input type="radio" name="q3" value="b"> Tre gånger längre<br>
+            <input type="radio" name="q3" value="c"> Fyra gånger längre<br>
+            <p id="svar3"></p>
+        </div>
+
+        <!-- Lägg gärna till fler frågor här på samma sätt -->
+        <!-- Kom ihåg att lägga till dem i JavaScript-delen längre ner -->
+
+    </div>
+
+    <button onclick="kollaSvar()">Rätta svaren</button>
+
+    <p id="resultat"></p>
+
+    <script>
+        function kollaSvar() {
+            let poang = 0;
+
+            // Fråga 1
+            let q1 = document.querySelector('input[name="q1"]:checked');
+            let text1 = document.getElementById("svar1");
+            if (q1 && q1.value === "a") {
+                text1.textContent = "Rätt!";
+                text1.className = "rätt";
+                poang++;
             } else {
-                text += " – du svarade inte";
+                text1.textContent = "Fel – rätt svar är Stopp!";
+                text1.className = "fel";
             }
-            feedback.textContent = text;
-            feedback.style.color = "red";
-            feedback.style.fontWeight = "bold";
+
+            // Fråga 2
+            let q2 = document.querySelector('input[name="q2"]:checked');
+            let text2 = document.getElementById("svar2");
+            if (q2 && q2.value === "b") {
+                text2.textContent = "Rätt!";
+                text2.className = "rätt";
+                poang++;
+            } else {
+                text2.textContent = "Fel – rätt svar är 50 km/h";
+                text2.className = "fel";
+            }
+
+            // Fråga 3
+            let q3 = document.querySelector('input[name="q3"]:checked');
+            let text3 = document.getElementById("svar3");
+            if (q3 && q3.value === "c") {
+                text3.textContent = "Rätt!";
+                text3.className = "rätt";
+                poang++;
+            } else {
+                text3.textContent = "Fel – rätt svar är fyra gånger längre";
+                text3.className = "fel";
+            }
+
+            // Resultatet längst ner
+            document.getElementById("resultat").textContent = 
+                "Du fick " + poang + " av 3 rätt!";
+            
+            // Om du vill ha lite färg på totalen också
+            if (poang >= 3) {
+                document.getElementById("resultat").style.color = "green";
+            } else if (poang >= 2) {
+                document.getElementById("resultat").style.color = "orange";
+            } else {
+                document.getElementById("resultat").style.color = "red";
+            }
         }
-    }
+    </script>
 
-    // Resultatet högst upp eller längst ner
-    resultDiv.textContent = "Du fick " + poäng + " av " + total + " rätt!";
-    
-    if (poäng >= total * 0.8) {
-        resultDiv.style.backgroundColor = "#d4edda";
-        resultDiv.style.color = "#155724";
-    } else {
-        resultDiv.style.backgroundColor = "#f8d7da";
-        resultDiv.style.color = "#721c24";
-    }
-    
-    resultDiv.style.padding = "15px";
-    resultDiv.style.borderRadius = "8px";
-    resultDiv.style.textAlign = "center";
-    resultDiv.style.fontSize = "1.3em";
-    resultDiv.style.margin = "25px 0";
-    resultDiv.classList.remove("hidden");
-
-    submitBtn.classList.add("hidden");
-    resetBtn.classList.remove("hidden");
-});
+</body>
+</html>
