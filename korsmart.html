@@ -3,138 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Körkortsquiz</title>
+    <title>Körkortsquiz – Testa dina kunskaper!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            max-width: 700px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #333;
         }
-        h1 {
-            text-align: center;
+        h1, h2 { text-align: center; color: #2c3e50; }
+        h3 { margin-top: 1.8em; color: #34495e; }
+        .question {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .fråga {
-            margin: 25px 0;
-            padding: 15px;
-            background: #f8f8f8;
-            border: 1px solid #ddd;
+        img { max-width: 180px; height: auto; display: block; margin: 10px 0; border-radius: 6px; }
+        label {
+            display: block;
+            margin: 8px 0;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
         }
+        label:hover { background: #f0f0f0; }
         button {
-            padding: 12px 25px;
-            font-size: 16px;
-            background: #4CAF50;
+            background: #27ae60;
             color: white;
             border: none;
+            padding: 14px 28px;
+            font-size: 1.1em;
+            border-radius: 6px;
             cursor: pointer;
+            margin: 20px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
-        button:hover {
-            background: #45a049;
-        }
-        #resultat {
-            font-size: 20px;
-            font-weight: bold;
+        button:hover { background: #219653; }
+        #result {
             text-align: center;
-            margin: 30px 0;
+            font-size: 1.4em;
+            margin: 25px 0;
+            padding: 15px;
+            border-radius: 8px;
         }
-        .rätt    { color: green; }
-        .fel     { color: red; }
+        .correct { background: #d4edda; color: #155724; }
+        .wrong   { background: #f8d7da; color: #721c24; }
+        .feedback { font-weight: bold; margin-top: 6px; min-height: 1.4em; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
     <h1>Testa dina körkortskunskaper!</h1>
-    <p>Välj svar och klicka på "Rätta svaren" när du är klar.</p>
+    <h2>Körkortsquiz – körkortsteori B</h2>
+    <p style="text-align:center;">Välj det rätta svaret på varje fråga. När du är klar klickar du på "Rätta svaren".</p>
 
-    <div id="quiz">
+    <form id="quizForm">
 
-        <div class="fråga">
+        <!-- Fråga 1 -->
+        <div class="question">
             <h3>1. Vad betyder den här skylten?</h3>
-            <img src="https://media.istockphoto.com/id/172233405/sv/foto/stop-sign-with-clipping-path.jpg?s=612x612&w=0&k=20&c=nC8a87InK0mMsAEEqifmGXfhEE5j4fhRD7krKEzSFZg=" width="120">
-            <br>
-            <input type="radio" name="q1" value="a"> Stopp – du måste stanna helt<br>
-            <input type="radio" name="q1" value="b"> Varning för vägkorsning<br>
-            <input type="radio" name="q1" value="c"> Väjningsplikt<br>
-            <p id="svar1"></p>
+            <img src="https://media.istockphoto.com/id/172233405/sv/foto/stop-sign-with-clipping-path.jpg?s=612x612&w=0&k=20&c=nC8a87InK0mMsAEEqifmGXfhEE5j4fhRD7krKEzSFZg=" alt="Stoppskylt">
+            <div>
+                <label><input type="radio" name="q1" value="a"> Stopp – du måste stanna helt</label>
+                <label><input type="radio" name="q1" value="b"> Varning för vägkorsning</label>
+                <label><input type="radio" name="q1" value="c"> Väjningsplikt mot korsande trafik</label>
+            </div>
+            <div id="feedback1" class="feedback"></div>
         </div>
 
-        <div class="fråga">
+        <!-- Fråga 2 -->
+        <div class="question">
             <h3>2. Hur fort får du köra i tätbebyggt område om inget annat anges?</h3>
-            <input type="radio" name="q2" value="a"> 30 km/h<br>
-            <input type="radio" name="q2" value="b"> 50 km/h<br>
-            <input type="radio" name="q2" value="c"> 70 km/h<br>
-            <p id="svar2"></p>
+            <div>
+                <label><input type="radio" name="q2" value="a"> 30 km/h</label>
+                <label><input type="radio" name="q2" value="b"> 50 km/h</label>
+                <label><input type="radio" name="q2" value="c"> 70 km/h</label>
+            </div>
+            <div id="feedback2" class="feedback"></div>
         </div>
 
-        <div class="fråga">
-            <h3>3. Du kör 110 km/h. Hur många gånger längre bromssträcka vid 220 km/h?</h3>
-            <input type="radio" name="q3" value="a"> Dubbelt så lång<br>
-            <input type="radio" name="q3" value="b"> Tre gånger längre<br>
-            <input type="radio" name="q3" value="c"> Fyra gånger längre<br>
-            <p id="svar3"></p>
+        <!-- Fråga 3 -->
+        <div class="question">
+            <h3>3. Du kör 110 km/h på motorväg. Hur många gånger längre blir bromssträckan om du ökar till 220 km/h?</h3>
+            <div>
+                <label><input type="radio" name="q3" value="a"> Dubbelt så lång</label>
+                <label><input type="radio" name="q3" value="b"> Tre gånger längre</label>
+                <label><input type="radio" name="q3" value="c"> Fyra gånger längre</label>
+            </div>
+            <div id="feedback3" class="feedback"></div>
         </div>
 
-        <!-- Lägg gärna till fler frågor här på samma sätt -->
-        <!-- Kom ihåg att lägga till dem i JavaScript-delen längre ner -->
+        <!-- Fråga 4 -->
+        <div class="question">
+            <h3>4. Vad gäller vid ett fast rött ljus med en grön pil åt höger?</h3>
+            <div>
+                <label><input type="radio" name="q4" value="a"> Du får svänga höger efter att ha lämnat företräde</label>
+                <label><input type="radio" name="q4" value="b"> Du måste vänta på grönt ljus åt alla håll</label>
+                <label><input type="radio" name="q4" value="c"> Du får köra rakt fram men inte svänga</label>
+            </div>
+            <div id="feedback4" class="feedback"></div>
+        </div>
 
-    </div>
+        <!-- Fråga 5 -->
+        <div class="question">
+            <h3>5. Minsta tillåtna mönsterdjup på däck sommardäck personbil?</h3>
+            <div>
+                <label><input type="radio" name="q5" value="a"> 1,6 mm</label>
+                <label><input type="radio" name="q5" value="b"> 2,0 mm</label>
+                <label><input type="radio" name="q5" value="c"> 3,0 mm</label>
+            </div>
+            <div id="feedback5" class="feedback"></div>
+        </div>
 
-    <button onclick="kollaSvar()">Rätta svaren</button>
+        <!-- Fler frågor – lägg gärna till själv! -->
+        <!-- Exempel på hur du lägger till fler: kopiera ett question-block och ändra nr, namn, alternativ & rätt svar i JS längre ner -->
 
-    <p id="resultat"></p>
+        <button type="button" id="submitBtn">Rätta svaren</button>
+        <button type="button" id="resetBtn" class="hidden">Börja om quiz</button>
+
+    </form>
+
+    <div id="result" class="hidden"></div>
 
     <script>
-        function kollaSvar() {
-            let poang = 0;
+        const correctAnswers = {
+            q1: "a",  // Stopp – du måste stanna helt
+            q2: "b",  // 50 km/h
+            q3: "c",  // Fyra gånger längre (bromssträcka ökar med kvadraten på hastigheten)
+            q4: "a",  // Får svänga höger efter väjning
+            q5: "a"   // 1,6 mm (sommardäck)
+            // Lägg till fler här när du lägger till frågor, t.ex. q6: "b"
+        };
 
-            // Fråga 1
-            let q1 = document.querySelector('input[name="q1"]:checked');
-            let text1 = document.getElementById("svar1");
-            if (q1 && q1.value === "a") {
-                text1.textContent = "Rätt!";
-                text1.className = "rätt";
-                poang++;
-            } else {
-                text1.textContent = "Fel – rätt svar är Stopp!";
-                text1.className = "fel";
+        const form = document.getElementById("quizForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const resultDiv = document.getElementById("result");
+
+        submitBtn.addEventListener("click", () => {
+            let score = 0;
+            const total = Object.keys(correctAnswers).length;
+
+            for (let key in correctAnswers) {
+                const radios = document.getElementsByName(key);
+                let selectedValue = null;
+                for (let radio of radios) {
+                    if (radio.checked) {
+                        selectedValue = radio.value;
+                        break;
+                    }
+                }
+
+                const feedback = document.getElementById("feedback" + key.slice(1));
+                if (selectedValue === correctAnswers[key]) {
+                    feedback.textContent = "✔ Rätt!";
+                    feedback.className = "feedback correct";
+                    score++;
+                } else {
+                    feedback.textContent = selectedValue 
+                        ? "✘ Fel – rätt svar är " + correctAnswers[key].toUpperCase()
+                        : "✘ Du svarade inte";
+                    feedback.className = "feedback wrong";
+                }
             }
 
-            // Fråga 2
-            let q2 = document.querySelector('input[name="q2"]:checked');
-            let text2 = document.getElementById("svar2");
-            if (q2 && q2.value === "b") {
-                text2.textContent = "Rätt!";
-                text2.className = "rätt";
-                poang++;
-            } else {
-                text2.textContent = "Fel – rätt svar är 50 km/h";
-                text2.className = "fel";
-            }
+            resultDiv.innerHTML = `Du fick <strong>${score} av ${total}</strong> rätt!`;
+            resultDiv.className = score >= Math.ceil(total * 0.8) ? "correct" : "wrong";
+            resultDiv.classList.remove("hidden");
 
-            // Fråga 3
-            let q3 = document.querySelector('input[name="q3"]:checked');
-            let text3 = document.getElementById("svar3");
-            if (q3 && q3.value === "c") {
-                text3.textContent = "Rätt!";
-                text3.className = "rätt";
-                poang++;
-            } else {
-                text3.textContent = "Fel – rätt svar är fyra gånger längre";
-                text3.className = "fel";
-            }
+            submitBtn.classList.add("hidden");
+            resetBtn.classList.remove("hidden");
+        });
 
-            // Resultatet längst ner
-            document.getElementById("resultat").textContent = 
-                "Du fick " + poang + " av 3 rätt!";
-            
-            // Om du vill ha lite färg på totalen också
-            if (poang >= 3) {
-                document.getElementById("resultat").style.color = "green";
-            } else if (poang >= 2) {
-                document.getElementById("resultat").style.color = "orange";
-            } else {
-                document.getElementById("resultat").style.color = "red";
-            }
-        }
+        resetBtn.addEventListener("click", () => {
+            form.reset();
+            document.querySelectorAll(".feedback").forEach(el => {
+                el.textContent = "";
+                el.className = "feedback";
+            });
+            resultDiv.classList.add("hidden");
+            submitBtn.classList.remove("hidden");
+            resetBtn.classList.add("hidden");
+        });
     </script>
 
 </body>
