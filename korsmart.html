@@ -3,76 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Körkortsquiz – Testa dina kunskaper!</title>
-    <link rel="stylesheet" href="style.css">
+    <title>KörSmart – Körkortsquiz</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0d6efd, #4dabf7);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+
+        .question img {
+            max-width: 220px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .wrong {
+            color: red;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .quiz-card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-radius: 15px;
+        }
+
+        footer {
+            background-color: #212529;
+            color: white;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Testa dina körkortskunskaper!</h1>
-    <h2>Körkortsquiz – körkortsteori B</h2>
-    <p>Välj det rätta svaret på varje fråga. När du är klar klickar du på "Rätta svaren".</p>
 
-    <form id="quizForm">
-        <!-- Fråga 1 -->
-        <div class="question">
-            <h3>1. Vad betyder den här skylten?</h3>
-            <img src="https://media.istockphoto.com/id/172233405/sv/foto/stop-sign-with-clipping-path.jpg?s=612x612&w=0&k=20&c=nC8a87InK0mMsAEEqifmGXfhEE5j4fhRD7krKEzSFZg=" alt="Stoppskylt">
-            <div class="alternativ">
-                <label><input type="radio" name="q1" value="a"> Stopp – du måste stanna helt</label>
-                <label><input type="radio" name="q1" value="b"> Varning för vägkorsning</label>
-                <label><input type="radio" name="q1" value="c"> Väjningsplikt mot korsande trafik</label>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">KörSmart</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#start">Start</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#om">Om sidan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#quiz">Quiz</a></li>
+                </ul>
             </div>
-            <div id="feedback1" class="feedback"></div>
         </div>
+    </nav>
 
-        <!-- Fråga 2 -->
-        <div class="question">
-            <h3>2. Hur fort får du köra i tätbebyggt område om inget annat anges?</h3>
-            <div class="alternativ">
-                <label><input type="radio" name="q2" value="a"> 30 km/h</label>
-                <label><input type="radio" name="q2" value="b"> 50 km/h</label>
-                <label><input type="radio" name="q2" value="c"> 70 km/h</label>
+    <!-- Hero / Front page -->
+    <section class="hero" id="start">
+        <div class="container">
+            <h1 class="fw-bold">Testa dina körkortskunskaper</h1>
+            <p class="lead">En enkel webbplats där du kan öva på körkortsteori för behörighet B.</p>
+            <a href="#quiz" class="btn btn-light btn-lg mt-3">Börja quizet</a>
+        </div>
+    </section>
+
+    <!-- Om sidan -->
+    <section class="py-5" id="om">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <div class="card quiz-card h-100 p-3">
+                        <div class="card-body">
+                            <h3 class="card-title">Öva teori</h3>
+                            <p class="card-text">
+                                Träna på vanliga frågor inom trafikregler, vägmärken och säkerhet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card quiz-card h-100 p-3">
+                        <div class="card-body">
+                            <h3 class="card-title">Direkt resultat</h3>
+                            <p class="card-text">
+                                När du är klar rättas dina svar direkt så att du ser hur många rätt du fick.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card quiz-card h-100 p-3">
+                        <div class="card-body">
+                            <h3 class="card-title">Enkel design</h3>
+                            <p class="card-text">
+                                Sidan är byggd med HTML, CSS, JavaScript och Bootstrap för att bli tydlig och responsiv.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="feedback2" class="feedback"></div>
         </div>
+    </section>
 
-        <!-- Fråga 3 -->
-        <div class="question">
-            <h3>3. Du kör 110 km/h på motorväg. Hur många gånger längre blir bromssträckan om du ökar till 220 km/h?</h3>
-            <div class="alternativ">
-                <label><input type="radio" name="q3" value="a"> Dubbelt så lång</label>
-                <label><input type="radio" name="q3" value="b"> Tre gånger längre</label>
-                <label><input type="radio" name="q3" value="c"> Fyra gånger längre</label>
-            </div>
-            <div id="feedback3" class="feedback"></div>
+    <!-- Quiz -->
+    <section class="pb-5" id="quiz">
+        <div class="container">
+            <h2 class="text-center mb-4">Körkortsquiz – körkortsteori B</h2>
+            <p class="text-center mb-5">Välj det rätta svaret på varje fråga och klicka sedan på "Rätta svaren".</p>
+
+            <form id="quizForm">
+
+                <!-- Fråga 1 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>1. Vad betyder den här skylten?</h4>
+                    <img src="https://media.istockphoto.com/id/172233405/sv/foto/stop-sign-with-clipping-path.jpg?s=612x612&w=0&k=20&c=nC8a87InK0mMsAEEqifmGXfhEE5j4fhRD7krKEzSFZg=" alt="Stoppskylt" class="img-fluid">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q1" value="a" id="q1a">
+                        <label class="form-check-label" for="q1a">Stopp – du måste stanna helt</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q1" value="b" id="q1b">
+                        <label class="form-check-label" for="q1b">Varning för vägkorsning</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q1" value="c" id="q1c">
+                        <label class="form-check-label" for="q1c">Väjningsplikt mot korsande trafik</label>
+                    </div>
+                    <div id="feedback1" class="feedback"></div>
+                </div>
+
+                <!-- Fråga 2 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>2. Hur fort får du köra i tätbebyggt område om inget annat anges?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q2" value="a" id="q2a">
+                        <label class="form-check-label" for="q2a">30 km/h</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q2" value="b" id="q2b">
+                        <label class="form-check-label" for="q2b">50 km/h</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q2" value="c" id="q2c">
+                        <label class="form-check-label" for="q2c">70 km/h</label>
+                    </div>
+                    <div id="feedback2" class="feedback"></div>
+                </div>
+
+                <!-- Fråga 3 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>3. Du kör 110 km/h på motorväg. Hur många gånger längre blir bromssträckan om du ökar till 220 km/h?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q3" value="a" id="q3a">
+                        <label class="form-check-label" for="q3a">Dubbelt så lång</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q3" value="b" id="q3b">
+                        <label class="form-check-label" for="q3b">Tre gånger längre</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q3" value="c" id="q3c">
+                        <label class="form-check-label" for="q3c">Fyra gånger längre</label>
+                    </div>
+                    <div id="feedback3" class="feedback"></div>
+                </div>
+
+                <!-- Fråga 4 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>4. Vad gäller vid ett fast rött ljus med en grön pil åt höger?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q4" value="a" id="q4a">
+                        <label class="form-check-label" for="q4a">Du får svänga höger efter att ha lämnat företräde</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q4" value="b" id="q4b">
+                        <label class="form-check-label" for="q4b">Du måste vänta på grönt ljus åt alla håll</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q4" value="c" id="q4c">
+                        <label class="form-check-label" for="q4c">Du får köra rakt fram men inte svänga</label>
+                    </div>
+                    <div id="feedback4" class="feedback"></div>
+                </div>
+
+                <!-- Fråga 5 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>5. Minsta tillåtna mönsterdjup på sommardäck för personbil?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q5" value="a" id="q5a">
+                        <label class="form-check-label" for="q5a">1,6 mm</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q5" value="b" id="q5b">
+                        <label class="form-check-label" for="q5b">2,0 mm</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q5" value="c" id="q5c">
+                        <label class="form-check-label" for="q5c">3,0 mm</label>
+                    </div>
+                    <div id="feedback5" class="feedback"></div>
+                </div>
+
+                <!-- Fråga 6 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>6. Vad är viktigt att tänka på vid halt väglag?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q6" value="a" id="q6a">
+                        <label class="form-check-label" for="q6a">Öka hastigheten för att komma fram snabbare</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q6" value="b" id="q6b">
+                        <label class="form-check-label" for="q6b">Hålla längre avstånd till framförvarande fordon</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q6" value="c" id="q6c">
+                        <label class="form-check-label" for="q6c">Bromsa hårt i kurvor</label>
+                    </div>
+                    <div id="feedback6" class="feedback"></div>
+                </div>
+
+                <!-- Fråga 7 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>7. När ska du använda bilbälte?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q7" value="a" id="q7a">
+                        <label class="form-check-label" for="q7a">Bara vid långa resor</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q7" value="b" id="q7b">
+                        <label class="form-check-label" for="q7b">Alltid när bilen körs</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q7" value="c" id="q7c">
+                        <label class="form-check-label" for="q7c">Bara på motorväg</label>
+                    </div>
+                    <div id="feedback7" class="feedback"></div>
+                </div>
+
+                <!-- Fråga 8 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>8. Vad betyder väjningsplikt?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q8" value="a" id="q8a">
+                        <label class="form-check-label" for="q8a">Du måste alltid stanna helt</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q8" value="b" id="q8b">
+                        <label class="form-check-label" for="q8b">Du ska tydligt visa hänsyn och lämna företräde om det behövs</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q8" value="c" id="q8c">
+                        <label class="form-check-label" for="q8c">Du får alltid köra först om du blinkar</label>
+                    </div>
+                    <div id="feedback8" class="feedback"></div>
+                </div>
+
+                <!-- Fråga 9 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>9. Vad bör du göra innan du byter körfält?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q9" value="a" id="q9a">
+                        <label class="form-check-label" for="q9a">Tuta så andra flyttar på sig</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q9" value="b" id="q9b">
+                        <label class="form-check-label" for="q9b">Titta i speglarna, kontrollera döda vinkeln och blinka</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q9" value="c" id="q9c">
+                        <label class="form-check-label" for="q9c">Bromsa kraftigt direkt</label>
+                    </div>
+                    <div id="feedback9" class="feedback"></div>
+                </div>
+
+                <!-- Fråga 10 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>10. Varför är det farligt att använda mobilen när du kör?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q10" value="a" id="q10a">
+                        <label class="form-check-label" for="q10a">Det påverkar inte körningen så mycket</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q10" value="b" id="q10b">
+                        <label class="form-check-label" for="q10b">Du blir distraherad och reagerar långsammare</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q10" value="c" id="q10c">
+                        <label class="form-check-label" for="q10c">Bilen använder mer bränsle</label>
+                    </div>
+                    <div id="feedback10" class="feedback"></div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="button" id="submitBtn" class="btn btn-primary btn-lg">Rätta svaren</button>
+                    <button type="button" id="resetBtn" class="btn btn-secondary btn-lg hidden">Börja om quiz</button>
+                </div>
+            </form>
+
+            <div id="result" class="text-center mt-4 fs-4 fw-bold hidden"></div>
         </div>
+    </section>
 
-        <!-- Fråga 4 -->
-        <div class="question">
-            <h3>4. Vad gäller vid ett fast rött ljus med en grön pil åt höger?</h3>
-            <div class="alternativ">
-                <label><input type="radio" name="q4" value="a"> Du får svänga höger efter att ha lämnat företräde</label>
-                <label><input type="radio" name="q4" value="b"> Du måste vänta på grönt ljus åt alla håll</label>
-                <label><input type="radio" name="q4" value="c"> Du får köra rakt fram men inte svänga</label>
-            </div>
-            <div id="feedback4" class="feedback"></div>
+    <footer>
+        <div class="container text-center">
+            <p class="mb-0">Gymnasiearbete – KörSmart</p>
         </div>
-
-        <!-- Fråga 5 -->
-        <div class="question">
-            <h3>5. Minsta tillåtna mönsterdjup på däck sommardäck personbil?</h3>
-            <div class="alternativ">
-                <label><input type="radio" name="q5" value="a"> 1,6 mm</label>
-                <label><input type="radio" name="q5" value="b"> 2,0 mm</label>
-                <label><input type="radio" name="q5" value="c"> 3,0 mm</label>
-            </div>
-            <div id="feedback5" class="feedback"></div>
-        </div>
-
-        <button type="button" id="submitBtn">Rätta svaren</button>
-        <button type="button" id="resetBtn" class="hidden">Börja om quiz</button>
-    </form>
-
-    <div id="result" class="hidden"></div>
+    </footer>
 
     <script>
         const correctAnswers = {
@@ -80,7 +340,12 @@
             q2: "b",
             q3: "c",
             q4: "a",
-            q5: "a"
+            q5: "a",
+            q6: "b",
+            q7: "b",
+            q8: "b",
+            q9: "b",
+            q10: "b"
         };
 
         const form = document.getElementById("quizForm");
@@ -88,51 +353,67 @@
         const resetBtn = document.getElementById("resetBtn");
         const resultDiv = document.getElementById("result");
 
-        submitBtn.addEventListener("click", () => {
+        submitBtn.addEventListener("click", function () {
             let score = 0;
-            const total = Object.keys(correctAnswers).length;
+            let total = Object.keys(correctAnswers).length;
 
             for (let key in correctAnswers) {
-                const radios = document.getElementsByName(key);
+                let radios = document.getElementsByName(key);
                 let selectedValue = null;
-                for (let radio of radios) {
-                    if (radio.checked) {
-                        selectedValue = radio.value;
-                        break;
+
+                for (let i = 0; i < radios.length; i++) {
+                    if (radios[i].checked) {
+                        selectedValue = radios[i].value;
                     }
                 }
 
-                const feedback = document.getElementById("feedback" + key.slice(1));
+                let questionNumber = key.replace("q", "");
+                let feedback = document.getElementById("feedback" + questionNumber);
+
                 if (selectedValue === correctAnswers[key]) {
                     feedback.textContent = "✔ Rätt!";
                     feedback.className = "feedback correct";
                     score++;
+                } else if (selectedValue === null) {
+                    feedback.textContent = "✘ Du svarade inte på frågan.";
+                    feedback.className = "feedback wrong";
                 } else {
-                    feedback.textContent = selectedValue 
-                        ? "✘ Fel – rätt svar är " + correctAnswers[key].toUpperCase()
-                        : "✘ Du svarade inte";
+                    feedback.textContent = "✘ Fel svar.";
                     feedback.className = "feedback wrong";
                 }
             }
 
-            resultDiv.textContent = "Du fick " + score + " av " + total + " rätt!";
-            resultDiv.className = score >= Math.ceil(total * 0.8) ? "correct" : "wrong";
             resultDiv.classList.remove("hidden");
+
+            if (score >= 8) {
+                resultDiv.textContent = "Bra jobbat! Du fick " + score + " av " + total + " rätt!";
+                resultDiv.className = "text-center mt-4 fs-4 fw-bold correct";
+            } else {
+                resultDiv.textContent = "Du fick " + score + " av " + total + " rätt. Försök igen!";
+                resultDiv.className = "text-center mt-4 fs-4 fw-bold wrong";
+            }
 
             submitBtn.classList.add("hidden");
             resetBtn.classList.remove("hidden");
         });
 
-        resetBtn.addEventListener("click", () => {
+        resetBtn.addEventListener("click", function () {
             form.reset();
-            document.querySelectorAll(".feedback").forEach(el => {
-                el.textContent = "";
-                el.className = "feedback";
-            });
-            resultDiv.classList.add("hidden");
+
+            let feedbackList = document.querySelectorAll(".feedback");
+            for (let i = 0; i < feedbackList.length; i++) {
+                feedbackList[i].textContent = "";
+                feedbackList[i].className = "feedback";
+            }
+
+            resultDiv.textContent = "";
+            resultDiv.className = "text-center mt-4 fs-4 fw-bold hidden";
+
             submitBtn.classList.remove("hidden");
             resetBtn.classList.add("hidden");
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
