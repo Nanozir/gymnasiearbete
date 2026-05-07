@@ -265,10 +265,29 @@
                     <div id="feedback10" class="feedback"></div>
                 </div>
 
+                <!-- Fråga 11 -->
+                <div class="card quiz-card mb-4 p-4 question">
+                    <h4>11. Varför är det farligt att använda mobilen när du kör?</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q11" value="a" id="q11a">
+                        <label class="form-check-label" for="q11a">Det påverkar inte körningen så mycket</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q11" value="b" id="q11b">
+                        <label class="form-check-label" for="q11b">Du blir distraherad och reagerar långsammare</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q11" value="c" id="q11c">
+                        <label class="form-check-label" for="q11c">Bilen använder mer bränsle</label>
+                    </div>
+                    <div id="feedback11" class="feedback"></div>
+                </div>
+
                 <div class="text-center mt-4">
                     <button type="button" id="submitBtn" class="btn btn-primary btn-lg">Rätta svaren</button>
                     <button type="button" id="resetBtn" class="btn btn-secondary btn-lg hidden">Börja om quiz</button>
                 </div>
+            
             </form>
 
             <div id="result" class="text-center mt-4 fs-4 fw-bold hidden"></div>
@@ -292,7 +311,8 @@
             q7: "b",
             q8: "b",
             q9: "b",
-            q10: "b"
+            q10: "b",
+            q11: "b"
         };
 
         const form = document.getElementById("quizForm");
